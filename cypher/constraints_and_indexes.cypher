@@ -1,0 +1,17 @@
+CREATE CONSTRAINT patch_id IF NOT EXISTS
+FOR (p:Patch) REQUIRE p.id IS UNIQUE;
+
+CREATE CONSTRAINT section_id IF NOT EXISTS
+FOR (s:Section) REQUIRE s.id IS UNIQUE;
+
+CREATE CONSTRAINT change_id IF NOT EXISTS
+FOR (c:Change) REQUIRE c.id IS UNIQUE;
+
+CREATE CONSTRAINT agent_uuid IF NOT EXISTS
+FOR (a:Agent) REQUIRE a.uuid IS UNIQUE;
+
+CREATE FULLTEXT INDEX change_text_ft IF NOT EXISTS
+FOR (c:Change) ON EACH [c.text, c.section_name];
+
+CREATE FULLTEXT INDEX section_name_ft IF NOT EXISTS
+FOR (s:Section) ON EACH [s.name];
